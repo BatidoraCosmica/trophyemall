@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "694409734575",
+    "project_id": "trophyemall",
+    "storage_bucket": "trophyemall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694409734575:android:2704425c0ff8dab673675a",
+        "android_client_info": {
+          "package_name": "com.example.trophyemall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694409734575-dofujmfceufja3g7v3t88u2o632mm9b4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk-wA7LKJa82e2WjiSGEbf_fEGP8a11Ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694409734575-dofujmfceufja3g7v3t88u2o632mm9b4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
