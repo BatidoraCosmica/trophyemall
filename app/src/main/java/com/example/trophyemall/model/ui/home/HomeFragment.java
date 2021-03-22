@@ -1,4 +1,4 @@
-package com.example.trophyemall.ui.gallery;
+package com.example.trophyemall.model.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,20 +14,19 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trophyemall.R;
 
-public class GalleryFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+
             }
         });
         return root;

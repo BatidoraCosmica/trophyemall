@@ -3,9 +3,11 @@ package com.example.trophyemall;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.trophyemall.model.CreateActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        tvUser = findViewById(R.id.tvUsername);
-        tvMail = findViewById(R.id.tvUsermail);
-        ivIcon = findViewById(R.id.ivUsericon);
-        ivClose = findViewById(R.id.ivCloseSesion);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        tvUser = headerView.findViewById(R.id.tvUsername);
+        tvMail = headerView.findViewById(R.id.tvUsermail);
+        ivIcon = headerView.findViewById(R.id.ivUsericon);
+        ivClose = headerView.findViewById(R.id.ivCloseSesion);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         tvUser.setText(user.getDisplayName());
@@ -50,10 +54,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         fab.setOnClickListener(view -> {
-
+            startActivity(new Intent(this, CreateActivity.class));
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -68,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }

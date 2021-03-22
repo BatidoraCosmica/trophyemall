@@ -38,11 +38,11 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 String msg_error = "";
                 if (response == null) {
-                    msg_error = "You need to sign in";
+                    msg_error = "Es necesario iniciar sesión para acceder a la aplicación";
                 } else if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    msg_error = "Network error";
+                    msg_error = "Error de conexión";
                 } else {
-                    msg_error = "Unknown error";
+                    msg_error = "Error desconocido";
                 }
                 Toast.makeText(this, msg_error, Toast.LENGTH_LONG).show();
                 finish();

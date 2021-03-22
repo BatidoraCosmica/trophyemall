@@ -1,4 +1,4 @@
-package com.example.trophyemall.ui.gallery;
+package com.example.trophyemall.model.ui.gallery;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

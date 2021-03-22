@@ -1,4 +1,12 @@
 <resources>
+    <string-array name="valoresSpinner">
+        <item name="object">Objeto encontrado</item>
+        <item name="boss">Jefe derrotado</item>
+        <item name="easteregg">Secreto encontrado</item>
+        <item name="bug">Error del juego</item>
+        <item name="other">Otro</item>
+    </string-array>
+
     <string name="app_name">trophyemall</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -10,5 +18,14 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="todo2">TODO</string>
+    <string name="username">Username</string>
+    <string name="type">Type</string>
+    <string name="desc">Desc</string>
+    <string name="todo3">TODO</string>
+    <string name="todo4">TODO</string>
     <string name="todo">TODO</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="todo5">TODO</string>
 </resources>
