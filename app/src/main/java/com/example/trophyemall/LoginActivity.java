@@ -2,25 +2,33 @@ package com.example.trophyemall;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 100;
+    private static final String TAG = "Login for TrophyEmAll";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
         } else {
@@ -28,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -49,4 +58,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+    /*
+    public void sendEmailVerificationWithContinueUrl() {
+
+        String url = "http://www.example.com/verify?uid=" + user.getUid();
+        ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
+                .setUrl(url)
+                .setIOSBundleId("com.example.ios")
+                .setAndroidPackageName("com.example.trophyemall", false, null)
+                .build();
+
+        user.sendEmailVerification(actionCodeSettings)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Email sent.");
+                    }
+                });
+    }
+    */
 }

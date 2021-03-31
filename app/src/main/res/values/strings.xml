@@ -28,4 +28,7 @@
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="todo5">TODO</string>
+    <string name="inicio">Inicio</string>
+    <string name="elementos_guardados">Elementos guardados</string>
+    <string name="tus_publicaciones">Tus publicaciones</string>
 </resources>

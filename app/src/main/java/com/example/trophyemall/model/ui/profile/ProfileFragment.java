@@ -1,10 +1,9 @@
-package com.example.trophyemall.model.ui.slideshow;
+package com.example.trophyemall.model.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,16 +13,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trophyemall.R;
 
-public class SlideshowFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private ProfileViewModel profileViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        profileViewModel =
+                new ViewModelProvider(this).get(ProfileViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 
