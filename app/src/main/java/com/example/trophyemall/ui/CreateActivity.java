@@ -1,4 +1,4 @@
-package com.example.trophyemall.model;
+package com.example.trophyemall.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 

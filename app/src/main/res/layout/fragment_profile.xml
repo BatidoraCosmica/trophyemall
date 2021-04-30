@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/violet"
-    tools:context=".model.ui.profile.ProfileFragment">
+    tools:context=".ui.profile.ProfileFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

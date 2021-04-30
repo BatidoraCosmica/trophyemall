@@ -11,12 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trophyemall">
-        <activity android:name=".model.CreateActivity"></activity>
+        <activity android:name=".ui.CreateActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/Theme.Trophyemall.NoActionBar"></activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Trophyemall.NoActionBar">
             <intent-filter>

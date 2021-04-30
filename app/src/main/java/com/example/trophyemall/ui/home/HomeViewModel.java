@@ -1,4 +1,4 @@
-package com.example.trophyemall.model.ui.home;
+package com.example.trophyemall.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package com.example.trophyemall;
+package com.example.trophyemall.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.trophyemall.model.CreateActivity;
+import com.example.trophyemall.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;

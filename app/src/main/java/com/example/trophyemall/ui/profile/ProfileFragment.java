@@ -1,4 +1,4 @@
-package com.example.trophyemall.model.ui.profile;
+package com.example.trophyemall.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

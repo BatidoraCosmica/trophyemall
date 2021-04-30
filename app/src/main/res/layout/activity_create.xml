@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/turquoise"
-    tools:context=".model.CreateActivity">
+    tools:context=".ui.CreateActivity">
 
     <Spinner
         android:id="@+id/spCreateType"
