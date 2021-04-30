@@ -1,19 +1,34 @@
 package com.example.trophyemall.ui.gallery;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+import com.example.trophyemall.model.Post;
+import com.example.trophyemall.repository.PostRepository;
 
-    private MutableLiveData<String> mText;
+import java.util.List;
 
-    public GalleryViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+public class GalleryViewModel extends AndroidViewModel {
+
+    private PostRepository postRepository;
+    private LiveData<List<Post>> pAllPost;
+    public GalleryViewModel(@NonNull Application application) {
+        super(application);
+        postRepository = PostRepository.getInstance(application);
+        pAllPost = postRepository.getAllPost();
     }
-
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Post>> getAllPost()
+    {
+        return pAllPost;
+    }
+    public void insert(Post post){
+        postRepository.insert(post);
+    }
+    public void delete(Post post){postRepository.delete(post);
     }
 }

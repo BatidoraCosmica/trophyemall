@@ -22,7 +22,7 @@ public class PostRepository {
         entradas = pDao.getAllEntries();
     }
 
-    public LiveData<List<Post>> getAllDiario() {
+    public LiveData<List<Post>> getAllPost() {
         return entradas;
     }
 
@@ -30,16 +30,16 @@ public class PostRepository {
         return pDao.getTotalEntries();
     }
 
-    public void insert(Post diaDiario) {
-        PostDatabase.databaseWriter.execute(() -> pDao.insert(diaDiario));
+    public void insert(Post post) {
+        PostDatabase.databaseWriter.execute(() -> pDao.insert(post));
     }
 
-    public void update(Post diaDiario) {
-        PostDatabase.databaseWriter.execute(() -> pDao.update(diaDiario));
+    public void update(Post post) {
+        PostDatabase.databaseWriter.execute(() -> pDao.update(post));
     }
 
-    public void delete(Post diaDiario) {
-        PostDatabase.databaseWriter.execute(() -> pDao.delete(diaDiario));
+    public void delete(Post post) {
+        PostDatabase.databaseWriter.execute(() -> pDao.delete(post));
     }
 
 
