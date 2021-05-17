@@ -79,27 +79,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <ImageView
-                android:id="@+id/ivItemDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/todo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_delete" />
-
-            <ImageView
-                android:id="@+id/ivItemSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/todo"
-                app:layout_constraintBottom_toBottomOf="@+id/ivItemDelete"
-                app:layout_constraintEnd_toStartOf="@+id/ivItemDelete"
-                app:layout_constraintTop_toTopOf="@+id/ivItemDelete"
-                app:srcCompat="@drawable/ic_menu_gallery" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

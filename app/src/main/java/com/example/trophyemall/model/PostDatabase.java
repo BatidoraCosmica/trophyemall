@@ -36,10 +36,10 @@ public abstract class PostDatabase extends RoomDatabase{
             super.onCreate(db);
             databaseWriter.execute(() -> {
                 PostDao pDao = INSTANCE.postDao();
-                pDao.insert(new Post("UsuarioGenerico1", "Otro", "SISISISISISISISISISI"));
-                pDao.insert(new Post("UsuarioGenerico2", "Otro", "SISISISISISISISISISI"));
-                pDao.insert(new Post("UsuarioGenerico3", "Otro", "SISISISISISISISISISI"));
-                pDao.insert(new Post("UsuarioGenerico4", "Otro", "SISISISISISISISISISI"));
+                pDao.insert(new Post("UsuarioGenerico1", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
+                pDao.insert(new Post("UsuarioGenerico2", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
+                pDao.insert(new Post("UsuarioGenerico3", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
+                pDao.insert(new Post("UsuarioGenerico4", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
             });
         }
     };

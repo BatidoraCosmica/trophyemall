@@ -53,8 +53,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private TextView tvTipo;
         private TextView tvDescripcion;
         private ImageView ivFoto;
-        private ImageView icGuardar;
-        private ImageView icBorrar;
         private Post post;
 
         public PostViewHolder(@NonNull View itemView) {
@@ -63,16 +61,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             tvTipo = itemView.findViewById(R.id.tvItemType);
             tvDescripcion = itemView.findViewById(R.id.tvItemDesc);
             ivFoto = itemView.findViewById(R.id.ivItemImage);
-            icGuardar = itemView.findViewById(R.id.ivItemSave);
-            icBorrar = itemView.findViewById(R.id.ivItemDelete);
-            icGuardar.setOnClickListener(view -> {
-                if (listenerGuardar != null)
-                    listenerGuardar.onItemClickGuardar(listaPost.get(getAdapterPosition()));
-            });
-            icBorrar.setOnClickListener(view -> {
-                if (listenerBorrar != null)
-                    listenerBorrar.onItemClickBorrar(listaPost.get(getAdapterPosition()));
-            });
         }
 
         public Post getPost() {
