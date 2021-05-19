@@ -79,7 +79,7 @@ public class ProfileFragment extends Fragment {
     private void borrarPost(Post post,int posicion) {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
         dialogo.setTitle("Aviso");
-        dialogo.setMessage("¿Quieres borrar este post de tus elementos guardados?");
+        dialogo.setMessage("¿Quieres borrar este post de tus post subidos?");
         dialogo.setNegativeButton(android.R.string.cancel, new
                 DialogInterface.OnClickListener() {
                     @Override

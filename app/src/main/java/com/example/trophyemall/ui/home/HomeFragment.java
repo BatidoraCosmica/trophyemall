@@ -1,7 +1,9 @@
 package com.example.trophyemall.ui.home;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +20,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trophyemall.R;
 import com.example.trophyemall.model.Post;
+import com.example.trophyemall.ui.CreateActivity;
 import com.example.trophyemall.ui.adapters.PostAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeFragment extends Fragment {
-
+    private static final int RESULT_OK = 0;
+    public static int  OPTION_REQUEST_NUEVO = 1;
     private HomeViewModel homeViewModel;
     private RecyclerView rvHome;
     private PostAdapter adapter;
+    private FloatingActionButton fab;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +38,8 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         rvHome = root.findViewById(R.id.rvHome);
         adapter = new PostAdapter();
+        fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(view -> startActivityForResult(new Intent(getActivity(), CreateActivity.class), OPTION_REQUEST_NUEVO));
 
         return root;
     }
@@ -48,6 +56,16 @@ public class HomeFragment extends Fragment {
                 }
         );
         definirEventoSwiper();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Post post = data.getParcelableExtra(CreateActivity.EXTRA_POST);
+            homeViewModel.insert(post);
+        }
     }
 
     private void definirEventoSwiper() {
