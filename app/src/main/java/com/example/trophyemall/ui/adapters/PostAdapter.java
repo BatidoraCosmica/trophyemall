@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.trophyemall.R;
 import com.example.trophyemall.model.Post;
 
@@ -36,7 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.tvTipo.setText(post.getTipo());
             holder.tvDescripcion.setText(post.getDescripcion());
             if (!post.getFotoUri().equals(""))
-                holder.ivFoto.setImageURI(Uri.parse(post.getFotoUri()));
+                Glide.with(holder.itemView).load(post.getFotoUri()).into(holder.ivFoto);
             holder.post = post;
         }
     }

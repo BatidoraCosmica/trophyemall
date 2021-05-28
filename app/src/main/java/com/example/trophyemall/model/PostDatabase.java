@@ -36,10 +36,10 @@ public abstract class PostDatabase extends RoomDatabase{
             super.onCreate(db);
             databaseWriter.execute(() -> {
                 PostDao pDao = INSTANCE.postDao();
-                pDao.insert(new Post("UsuarioGenerico1", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
-                pDao.insert(new Post("UsuarioGenerico2", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
-                pDao.insert(new Post("UsuarioGenerico3", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
-                pDao.insert(new Post("UsuarioGenerico4", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
+                pDao.insert(new Post("Pepe Botella", "Jugada", "Una maravillosa jugada realizada por uno de los mejores jugadores, sin duda algo a tener en cuenta"));
+                pDao.insert(new Post("PlayerMaster76", "Error del juego", "El juego dejó de funcionar cuando pulsé la tecla de atacar demasiadas veces seguidas, LOL"));
+                pDao.insert(new Post("LorenaPro2244", "Secreto encontrado", "Resulta que debajo de la piedra número 662 había un coleccionable oculto"));
+                pDao.insert(new Post("BrocoliMan", "Otro", "SISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISISI"));
             });
         }
     };

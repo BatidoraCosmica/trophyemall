@@ -25,7 +25,8 @@ import com.example.trophyemall.ui.adapters.PostAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeFragment extends Fragment {
-    private static final int RESULT_OK = 0;
+    public static final int RESULT_OK = 0;
+    public static final int RESULT_CANCELED = -1;
     public static int  OPTION_REQUEST_NUEVO = 1;
     private HomeViewModel homeViewModel;
     private RecyclerView rvHome;

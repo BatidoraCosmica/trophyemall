@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trophyemall">
-        <activity android:name=".ui.CreateActivity"></activity>
+        <activity android:name=".ui.CreateActivity"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.MainActivity" />
+        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/Theme.Trophyemall.NoActionBar"></activity>

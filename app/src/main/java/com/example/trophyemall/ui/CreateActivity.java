@@ -1,5 +1,6 @@
 package com.example.trophyemall.ui;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,16 +18,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.trophyemall.R;
 import com.example.trophyemall.model.Post;
+import com.example.trophyemall.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.Manifest.permission_group.CAMERA;
 
 public class CreateActivity extends AppCompatActivity {
     public static final String EXTRA_POST = "com.example.trophyemall.ui.CreateActivity.Datos";
@@ -76,7 +78,7 @@ public class CreateActivity extends AppCompatActivity {
                     post.setFotoUri(uriFoto.toString());
                 }
                 if (id != -1) post.setId(id);
-                setResult(RESULT_OK, getIntent().putExtra(EXTRA_POST, post));
+                setResult(HomeFragment.RESULT_OK, getIntent().putExtra(EXTRA_POST, post));
                 finish();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -84,7 +86,7 @@ public class CreateActivity extends AppCompatActivity {
         });
 
         btnCancel.setOnClickListener(l -> {
-            setResult(RESULT_CANCELED);
+            setResult(HomeFragment.RESULT_CANCELED);
             finish();
         });
     }
@@ -106,15 +108,14 @@ public class CreateActivity extends AppCompatActivity {
     private boolean noNecesarioSolicitarPermisos() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return true;
-        if ((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) && (checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED))
+        if ((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED))
             return true;
-        if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE) || shouldShowRequestPermissionRationale(CAMERA)) {
+        if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
             Snackbar.make(cl, "Recuperar la foto requiere permisos...", Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, v -> requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS));
+                    .setAction(android.R.string.ok, v -> requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS));
         } else {
-            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS);
         }
-
         return false;
     }
 
@@ -123,15 +124,25 @@ public class CreateActivity extends AppCompatActivity {
         startActivityForResult(intent.createChooser(intent, "Seleccione imagen"), STATUS_CODE_SELECCION_IMAGEN);
     }
 
-
     private void muestraFoto() {
         Glide.with(this).load(uriFoto).into(img);
     }
 
     private void muestraOpcionesImagen() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setItems(new String[]{"Tomar foto",
+        builder.setItems(new String[]{"Tomar foto (WIP)",
                 "Elegir de la galería",
                 getString(android.R.string.cancel)}, (dialog, which) -> { if (which == 1) elegirGaleria(); dialog.dismiss(); }).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permisos aceptados", Toast.LENGTH_SHORT);
+                muestraOpcionesImagen();
+            }
+        }
     }
 }
