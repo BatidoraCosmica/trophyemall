@@ -21,8 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.trophyemall.R;
 import com.example.trophyemall.model.Post;
 import com.example.trophyemall.ui.CreateActivity;
+import com.example.trophyemall.ui.adapters.FeedAdapter;
 import com.example.trophyemall.ui.adapters.PostAdapter;
+import com.firebase.ui.common.ChangeEventType;
+import com.firebase.ui.firestore.ChangeEventListener;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 
 public class HomeFragment extends Fragment {
     public static final int RESULT_OK = 0;
@@ -30,7 +38,7 @@ public class HomeFragment extends Fragment {
     public static int  OPTION_REQUEST_NUEVO = 1;
     private HomeViewModel homeViewModel;
     private RecyclerView rvHome;
-    private PostAdapter adapter;
+    private FeedAdapter adapter;
     private FloatingActionButton fab;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,7 +46,6 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         rvHome = root.findViewById(R.id.rvHome);
-        adapter = new PostAdapter();
         fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivityForResult(new Intent(getActivity(), CreateActivity.class), OPTION_REQUEST_NUEVO));
 
@@ -51,11 +58,7 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         rvHome.setAdapter(adapter);
         rvHome.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        homeViewModel.getAllPost().observe(
-                getViewLifecycleOwner(), posts -> {
-                    adapter.setListaPost(posts);
-                }
-        );
+        defineAdaptador();
         definirEventoSwiper();
     }
 
@@ -65,8 +68,39 @@ public class HomeFragment extends Fragment {
 
         if (resultCode == RESULT_OK) {
             Post post = data.getParcelableExtra(CreateActivity.EXTRA_POST);
-            homeViewModel.insert(post);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("Feed").add(post);
         }
+    }
+
+    private void defineAdaptador() {
+        Query query = FirebaseFirestore.getInstance()
+                .collection("Feed")
+                .orderBy("id", Query.Direction.ASCENDING);
+        FirestoreRecyclerOptions<Post> options = new
+                FirestoreRecyclerOptions.Builder<Post>()
+                .setQuery(query, Post.class)
+                .setLifecycleOwner(this)
+                .build();
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+        adapter = new FeedAdapter(options);
+        rvHome.setAdapter(adapter);
+        adapter.startListening();
+        adapter.getSnapshots().addChangeEventListener(new ChangeEventListener() {
+            @Override
+            public void onChildChanged(@NonNull ChangeEventType type, @NonNull
+                    DocumentSnapshot snapshot, int newIndex, int oldIndex) {
+                rvHome.smoothScrollToPosition(0);
+            }
+            @Override
+            public void onDataChanged() {
+            }
+            @Override
+            public void onError(@NonNull FirebaseFirestoreException e) {
+            }
+        });
     }
 
     private void definirEventoSwiper() {
@@ -83,8 +117,8 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int
                             swipeDir) {
-                        PostAdapter.PostViewHolder
-                                vhPost = (PostAdapter.PostViewHolder) viewHolder;
+                        FeedAdapter.FeedHolder
+                                vhPost = (FeedAdapter.FeedHolder) viewHolder;
                         Post post = vhPost.getPost();
                         insertaPost(post, vhPost.getAdapterPosition());
                     }
