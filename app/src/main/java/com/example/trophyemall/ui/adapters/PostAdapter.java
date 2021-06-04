@@ -18,8 +18,15 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder>{
     private List<Post> listaPost;
-    private OnItemClickBorrarListener listenerBorrar;
-    private OnItemClickGuardarListener listenerGuardar;
+
+    /**
+     * Este método crea una instancia del viewholder y marca el layout "item_post" como forma en la
+     * que se muestran los post
+     * @param parent
+     * @param viewType
+     * @return
+     */
+
     @NonNull
     @Override
     public PostAdapter.PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,6 +35,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                         parent, false);
         return new PostViewHolder(itemView);
     }
+
+    /**
+     * Este método obtiene el post requerido, asocia los textos que muestran y la imagen
+     * @param holder
+     * @param position
+     */
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
@@ -41,6 +54,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.post = post;
         }
     }
+
+    /**
+     * Este método devuelve el total de los post que hay creados
+     * @return
+     */
 
     @Override
     public int getItemCount() {
@@ -73,21 +91,4 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         listaPost = posts;
         notifyDataSetChanged();
     }
-
-    public interface OnItemClickBorrarListener {
-        void onItemClickBorrar(Post post);
-    }
-
-    public interface OnItemClickGuardarListener{
-        void onItemClickGuardar(Post post);
-    }
-
-    public void setOnClickBorrarListener(OnItemClickBorrarListener listener) {
-        this.listenerBorrar = listener;
-    }
-
-    public void setOnClickGuardarListener(OnItemClickGuardarListener listener) {
-        this.listenerGuardar = listener;
-    }
-
 }

@@ -56,20 +56,35 @@ public class CreateActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnCreateAccept);
         btnCancel = findViewById(R.id.btnCreateCancel);
 
+        /**
+         * Aquí se recupera la información del usuario que está creando el post para más tarde añadir
+         * su nombre de usuario
+         */
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser fbUser = auth.getCurrentUser();
         String User = fbUser.getDisplayName();
 
+        /**
+         * Aquí se crea y vincula el adaptador para el array de tipo de post
+         */
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.valoresSpinner, android.R.layout.simple_spinner_item);
         spType.setAdapter(arrayAdapter);
         spType.setSelection(arrayAdapter.getPosition("5"));
 
+        /**
+         * Aquí se define que, al pulsar la imagen que viene por defecto, se puede cambiar por cualquier
+         * otra llamando al metodo de mostrar las opciones
+         */
         img.setOnClickListener(l -> {
             if (noNecesarioSolicitarPermisos()) {
                 muestraOpcionesImagen();
             }
         });
 
+        /**
+         * Aquí se define que, al pulsar el botón de aceptar, se guarda el post y se envía al fragmentHome
+         * para que lo suba a la base de datos de Firebase
+         */
         btnSave.setOnClickListener(l -> {
             try {
                 Post post = new Post(User, spType.getSelectedItem().toString(), etDesc.getText().toString());
@@ -91,6 +106,13 @@ public class CreateActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Aquí se recoge la foto escogida desde la galería del usuario y la muestra donde estaba la anterior
+     * imagen
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -104,6 +126,11 @@ public class CreateActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Este método solicita los permisos para abrir la galería si no los tiene, y si los tiene, los
+     * mantiene
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean noNecesarioSolicitarPermisos() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
@@ -119,15 +146,26 @@ public class CreateActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Este método abre la galería y permite seleccionar la foto deseada para, en otro método, mostrarla
+     */
     private void elegirGaleria() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).setType("image/*");
         startActivityForResult(intent.createChooser(intent, "Seleccione imagen"), STATUS_CODE_SELECCION_IMAGEN);
     }
 
+    /**
+     * Este método muestra la imagen seleccionada desde la galería
+     */
     private void muestraFoto() {
         Glide.with(this).load(uriFoto).into(img);
     }
 
+    /**
+     * Este método abre un diálogo que te permite escoger entre elegir una foto de la galería o tomar
+     * una foto desde la cámara, pero como esta segunda opción no funciona por el momento, solo hace algo
+     * si escoges la opción de elegir de la galería
+     */
     private void muestraOpcionesImagen() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setItems(new String[]{"Tomar foto (WIP)",

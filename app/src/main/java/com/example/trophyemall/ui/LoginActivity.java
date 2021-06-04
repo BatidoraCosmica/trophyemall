@@ -54,22 +54,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-    /*
-    public void sendEmailVerificationWithContinueUrl() {
-
-        String url = "http://www.example.com/verify?uid=" + user.getUid();
-        ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
-                .setUrl(url)
-                .setIOSBundleId("com.example.ios")
-                .setAndroidPackageName("com.example.trophyemall", false, null)
-                .build();
-
-        user.sendEmailVerification(actionCodeSettings)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "Email sent.");
-                    }
-                });
-    }
-    */
 }

@@ -42,11 +42,19 @@ public class MainActivity extends AppCompatActivity {
         tvMail = headerView.findViewById(R.id.tvUsermail);
         ivIcon = headerView.findViewById(R.id.ivUsericon);
         ivClose = headerView.findViewById(R.id.ivCloseSesion);
+        /**
+         * Aquí se recogen los datos del usuario para mostrar el nombre y el correo en el menú que se
+         * muestra al deslizar de izquierda a derecha
+         */
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         tvUser.setText(user.getDisplayName());
         tvMail.setText(user.getEmail());
 
+        /**
+         * Aquí se define que, al pulsar el botón de cerrar sesión, se cierra la sesión y te abre la
+         * actividad de iniciar sesión
+         */
         ivClose.setOnClickListener(l -> {
             auth.signOut();
             startActivity(new Intent(this, LoginActivity.class));

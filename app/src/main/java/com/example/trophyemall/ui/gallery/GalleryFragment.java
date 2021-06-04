@@ -35,6 +35,13 @@ public class GalleryFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Aquí se crea el viewmodel y el adaptador, se asocia este ultimo con el recyclerview y se llama
+     * al método de definir el evento de deslizar
+     * @param view
+     * @param savedInstanceState
+     */
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -48,6 +55,11 @@ public class GalleryFragment extends Fragment {
         );
         definirEventoSwiper();
     }
+
+    /**
+     * En este método se define que, al deslizar un post, ese post es borrado de la base de datos local
+     * pero no de la base de datos de Firebase
+     */
 
     private void definirEventoSwiper() {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new
@@ -72,6 +84,14 @@ public class GalleryFragment extends Fragment {
                 ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(rvGallery);
     }
+
+    /**
+     * En este método se muestra un diálogo que avisa de que se va a borrar el post y da la opción
+     * de aceptar o cancelar dicha acción. Al pulsar aceptar, borra el post solo de forma local, ya
+     * que el post en Firebase se mantiene intacto
+     * @param post
+     * @param posicion
+     */
 
     private void borrarPost(Post post,int posicion) {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());

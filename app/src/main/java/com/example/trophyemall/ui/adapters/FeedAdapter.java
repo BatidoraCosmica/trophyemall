@@ -20,13 +20,17 @@ import com.google.firebase.auth.FirebaseUser;
 import org.jetbrains.annotations.NotNull;
 
 public class FeedAdapter extends FirestoreRecyclerAdapter<Post, FeedAdapter.FeedHolder> {
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseUser fbUser = auth.getCurrentUser();
-    String usuario = fbUser.getEmail();
 
     public FeedAdapter(@NonNull FirestoreRecyclerOptions<Post> options) {
         super(options);
     }
+
+    /**
+     * Este método obtiene el post requerido, asocia los textos que muestran y la imagen
+     * @param holder
+     * @param position
+     * @param post
+     */
 
     @Override
     protected void onBindViewHolder(@NonNull FeedHolder holder, int position, @NonNull Post post) {
@@ -37,6 +41,14 @@ public class FeedAdapter extends FirestoreRecyclerAdapter<Post, FeedAdapter.Feed
             Glide.with(holder.itemView).load(post.getFotoUri()).into(holder.feedImg);
         holder.post = post;
     }
+
+    /**
+     * Este método crea una instancia del viewholder y marca el layout "item_post" como forma en la
+     * que se muestran los post
+     * @param parent
+     * @param viewType
+     * @return
+     */
 
     @NonNull
     @NotNull

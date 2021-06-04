@@ -12,6 +12,11 @@ import java.util.List;
 
 import io.reactivex.Single;
 
+/**
+ * Esta es la interfaz Dao utilizada para post, donde se declaran las funciones para hacer consultas
+ * y modificar la base de datos local
+ */
+
 @Dao
 public interface PostDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

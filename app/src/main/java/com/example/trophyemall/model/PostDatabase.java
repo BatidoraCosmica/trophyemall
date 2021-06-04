@@ -11,6 +11,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Esta clase crea la base de datos
+ */
+
 @Database(entities = {Post.class}, version = 1)
 public abstract class PostDatabase extends RoomDatabase{
     public abstract PostDao postDao();

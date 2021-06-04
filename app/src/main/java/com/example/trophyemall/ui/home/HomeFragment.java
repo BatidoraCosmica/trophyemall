@@ -52,6 +52,13 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Aquí se crea el viewmodel y el adaptador, se asocia este ultimo con el recyclerview y se llama
+     * a los métodos de definir el adaptador el evento de deslizar
+     * @param view
+     * @param savedInstanceState
+     */
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -61,6 +68,14 @@ public class HomeFragment extends Fragment {
         defineAdaptador();
         definirEventoSwiper();
     }
+
+    /**
+     * Aquí se marca qué hace cuando se le devuelve un post desde la actividad de crear los post, lo
+     * cual es subirlo a la base de datos de Firebase
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -73,10 +88,15 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    /**
+     * Este método recoge todos los post que hay en la base de datos y los muestra en el recyclerview
+     * con el adaptador que corresponde
+     */
+
     private void defineAdaptador() {
         Query query = FirebaseFirestore.getInstance()
                 .collection("Feed")
-                .orderBy("id", Query.Direction.ASCENDING);
+                .orderBy("order", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Post> options = new
                 FirestoreRecyclerOptions.Builder<Post>()
                 .setQuery(query, Post.class)
@@ -103,6 +123,11 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    /**
+     * En este método se define que, al deslizar un post, ese post es guardado en la base de datos local
+     * para poder visualizarlo sin conexión a internet
+     */
+
     private void definirEventoSwiper() {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new
                 ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT |
@@ -127,6 +152,13 @@ public class HomeFragment extends Fragment {
                 ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(rvHome);
     }
+
+    /**
+     * En este método se muestra un diálogo que avisa de que se va a guardar el post y da la opción
+     * de aceptar o cancelar dicha acción. Al pulsar aceptar, guarda el post de forma local
+     * @param post
+     * @param posicion
+     */
 
     private void insertaPost(Post post, int posicion) {
 

@@ -10,16 +10,25 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+import java.util.Calendar;
+
+/**
+ * Esta es la clase pojo utilizada para las publicaciones. No creo que sea necesaria una
+ * explicación referente a esta clase
+ */
 
 @Entity(tableName = Post.TABLE_NAME,
         indices = {@Index(value = {Post.ID},unique = true)})
 public class Post implements Parcelable {
+
     public static final String TABLE_NAME="post";
     public static final String ID= BaseColumns._ID;
     public static final String USUARIO="usuario";
     public static final String TIPO="tipo";
     public static final String DESCRIPCION="descripcion";
     public static final String FOTO_URI="foto_uri";
+    public static final String ORDER="order";
 
     @ColumnInfo(name = ID)
     @PrimaryKey(autoGenerate = true)
@@ -32,11 +41,14 @@ public class Post implements Parcelable {
     private String descripcion;
     @ColumnInfo(name = FOTO_URI)
     private String fotoUri;
+    @ColumnInfo(name = ORDER)
+    private long order;
 
     public Post() {
     }
 
     public Post(String usuario, String tipo, String descripcion, String fotoUri) {
+        this.order = Calendar.getInstance().getTimeInMillis();
         this.usuario = usuario;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -45,6 +57,7 @@ public class Post implements Parcelable {
 
     @Ignore
     public Post(String usuario, String tipo, String descripcion) {
+        this.order = Calendar.getInstance().getTimeInMillis();
         this.usuario = usuario;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -91,6 +104,14 @@ public class Post implements Parcelable {
         this.fotoUri = fotoUri;
     }
 
+    public long getOrder() {
+        return order;
+    }
+
+    public void setOrder(long order) {
+        this.order = order;
+    }
+
     public static String getTableName() {
         return TABLE_NAME;
     }
@@ -111,12 +132,17 @@ public class Post implements Parcelable {
         return DESCRIPCION;
     }
 
+    public static String getORDER() {
+        return ORDER;
+    }
+
     protected Post(Parcel in) {
         id = in.readInt();
         usuario = in.readString();
         tipo = in.readString();
         descripcion = in.readString();
         fotoUri = in.readString();
+        order = in.readLong();
     }
 
     @Override
@@ -131,6 +157,7 @@ public class Post implements Parcelable {
         dest.writeString(tipo);
         dest.writeString(descripcion);
         dest.writeString(fotoUri);
+        dest.writeLong(order);
     }
 
     @SuppressWarnings("unused")

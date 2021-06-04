@@ -12,6 +12,11 @@ import java.util.List;
 
 import io.reactivex.Single;
 
+/**
+ * Esta clase ejecuta las operaciones en la base de datos definidas en el Dao a través de las funciones
+ * que llaman al Dao
+ */
+
 public class PostRepository {
     private static volatile PostRepository INSTANCE;
     private PostDao pDao;
